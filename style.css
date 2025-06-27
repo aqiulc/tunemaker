@@ -1,0 +1,374 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.4;
+}
+
+.video-background video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.8) 100%);
+    z-index: -1;
+}
+
+.container {
+    max-width: 900px;
+    width: 100%;
+    background: rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    position: relative;
+    z-index: 1;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 3.5rem;
+    font-weight: 900;
+    font-family: 'Arial Black', 'Helvetica', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57, #ff9ff3, #54a0ff);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradient-shift 3s ease-in-out infinite;
+    text-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
+    position: relative;
+}
+
+.logo::before {
+    content: '♪';
+    position: absolute;
+    left: -40px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-15deg);
+    font-size: 2rem;
+    color: #ff6b6b;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.logo::after {
+    content: '♫';
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%) rotate(15deg);
+    font-size: 2rem;
+    color: #4ecdc4;
+    animation: bounce 2s ease-in-out infinite 0.5s;
+}
+
+@keyframes gradient-shift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(-50%) scale(1);
+    }
+    50% {
+        transform: translateY(-60%) scale(1.1);
+    }
+}
+
+.instructions {
+    background: rgba(78, 205, 196, 0.15);
+    border: 1px solid rgba(78, 205, 196, 0.4);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.instructions h2 {
+    color: #4ecdc4;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+}
+
+.instructions ol {
+    text-align: left;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+.instructions li {
+    margin-bottom: 8px;
+    color: #d0d0d0;
+}
+
+.upload-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.upload-progress {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.progress-bar {
+    width: 100%;
+    max-width: 400px;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    margin: 0 auto 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #007bff, #28a745);
+    width: 0%;
+    transition: width 0.3s ease;
+    border-radius: 4px;
+    position: relative;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.progress-text {
+    color: #d0d0d0;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+#audioFile {
+    display: none;
+}
+
+.upload-btn {
+    display: inline-block;
+    background: #007bff;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.2s;
+    border: none;
+}
+
+.upload-btn:hover {
+    background: #0056b3;
+}
+
+.player-section {
+    margin-top: 30px;
+}
+
+.audio-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+#audioPlayer {
+    flex: 1;
+    min-width: 300px;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 200px;
+}
+
+.volume-control label {
+    font-weight: 500;
+    color: #666;
+}
+
+#volumeSlider {
+    flex: 1;
+}
+
+#volumeValue {
+    font-weight: 500;
+    color: #333;
+    min-width: 40px;
+}
+
+.waveform-container {
+    position: relative;
+    margin: 20px 0;
+    text-align: center;
+}
+
+#waveform {
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    max-width: 100%;
+    height: auto;
+}
+
+.clip-controls {
+    background: rgba(40, 40, 40, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.time-inputs {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.time-inputs label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    color: #d0d0d0;
+}
+
+.time-inputs input[type="number"] {
+    width: 80px;
+    padding: 6px;
+    border: 1px solid #555;
+    border-radius: 4px;
+    font-size: 14px;
+    background: rgba(60, 60, 60, 0.8);
+    color: white;
+}
+
+#clipDuration {
+    font-weight: 500;
+    color: #4ecdc4;
+    padding: 6px 12px;
+    background: rgba(60, 60, 60, 0.8);
+    border-radius: 4px;
+    border: 1px solid #4ecdc4;
+}
+
+.clip-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.clip-actions button {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.clip-actions button:hover {
+    background: #218838;
+}
+
+#downloadClip {
+    background: #007bff;
+}
+
+#downloadClip:hover {
+    background: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+    
+    .audio-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .volume-control {
+        justify-content: center;
+    }
+    
+    .time-inputs {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .time-inputs label {
+        justify-content: space-between;
+    }
+    
+    #waveform {
+        width: 100%;
+        height: 150px;
+    }
+}
