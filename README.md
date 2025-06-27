@@ -19,7 +19,7 @@ A modern web-based audio clipping tool that allows users to upload music files a
 
 ## 🚀 Live Demo
 
-**[Try TuneMaker Live →](https://yourusername.github.io/tunemaker)**
+**[Try TuneMaker Live →]((https://aqiulc.github.io/tunemaker/))**
 
 ## 🛠️ How to Use
 
